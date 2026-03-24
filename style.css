@@ -532,6 +532,15 @@ footer {
     border-top: 1px solid var(--border);
 }
 
+.visitor-count {
+    margin-top: 0.5rem;
+}
+
+.visitor-count img {
+    height: 20px;
+    vertical-align: middle;
+}
+
 /* ===== Mobile ===== */
 @media (max-width: 768px) {
     .hero-content {
