@@ -19,43 +19,6 @@ navLinks.querySelectorAll('a').forEach(link => {
     });
 });
 
-// Publication filters
-const filterBtns = document.querySelectorAll('.filter-btn');
-const pubItems = document.querySelectorAll('.pub-item');
-const yearHeaders = document.querySelectorAll('.pub-year-header');
-
-filterBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-        filterBtns.forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-
-        const filter = btn.dataset.filter;
-
-        pubItems.forEach(item => {
-            if (filter === 'all') {
-                item.classList.remove('hidden');
-            } else {
-                const tags = item.dataset.tags || '';
-                item.classList.toggle('hidden', !tags.includes(filter));
-            }
-        });
-
-        // Show/hide year headers based on visible items
-        yearHeaders.forEach(header => {
-            let next = header.nextElementSibling;
-            let hasVisible = false;
-            while (next && !next.classList.contains('pub-year-header')) {
-                if (next.classList.contains('pub-item') && !next.classList.contains('hidden')) {
-                    hasVisible = true;
-                    break;
-                }
-                next = next.nextElementSibling;
-            }
-            header.style.display = hasVisible ? '' : 'none';
-        });
-    });
-});
-
 // Smooth scroll offset for fixed navbar
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
     anchor.addEventListener('click', function (e) {
