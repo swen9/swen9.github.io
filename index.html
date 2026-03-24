@@ -360,9 +360,27 @@
 
 <footer>
     <p>&copy; 2026 Song Wen. All rights reserved.</p>
-    <p class="visitor-count"><img src="https://visitor-badge.laobi.icu/badge?page_id=swen9.github.io" alt="visitors"></p>
 </footer>
 
 <script src="script.js"></script>
+<!-- Hidden visitor tracker — replace APPS_SCRIPT_URL with your Google Apps Script deployment URL -->
+<script>
+(function() {
+    var TRACKER_URL = 'APPS_SCRIPT_URL';
+    if (TRACKER_URL === 'APPS_SCRIPT_URL') return;
+    fetch('https://api.ipify.org?format=json')
+        .then(function(r) { return r.json(); })
+        .then(function(data) {
+            var params = '?page=' + encodeURIComponent(location.pathname)
+                + '&ip=' + encodeURIComponent(data.ip)
+                + '&ua=' + encodeURIComponent(navigator.userAgent);
+            new Image().src = TRACKER_URL + params;
+        })
+        .catch(function() {
+            var params = '?page=' + encodeURIComponent(location.pathname) + '&ip=unknown&ua=' + encodeURIComponent(navigator.userAgent);
+            new Image().src = TRACKER_URL + params;
+        });
+})();
+</script>
 </body>
 </html>
