@@ -153,6 +153,25 @@ nav {
 }
 .svc-tags span:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
 
+/* ===== Back to top ===== */
+.back-to-top {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 99;
+    width: 40px; height: 40px; border-radius: 50%;
+    background: var(--accent); color: #fff; border: none;
+    cursor: pointer; font-size: 0.85rem;
+    display: flex; align-items: center; justify-content: center;
+    box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.25s, transform 0.25s;
+    transform: translateY(8px);
+}
+.back-to-top.visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+.back-to-top:hover { background: #1d4ed8; }
+
+/* ===== Publication row hover ===== */
+.pub { transition: background 0.15s; border-radius: 6px; padding-left: 0.5rem; padding-right: 0.5rem; }
+.pub:hover { background: var(--bg-warm); }
+
 /* ===== Footer ===== */
 footer {
     max-width: var(--max-w); margin: 0 auto;

@@ -32,30 +32,33 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===== Scroll-spy =====
-const sections = document.querySelectorAll('.section[id], header[id]');
+const sections = document.querySelectorAll('.section[id]');
 const navAnchors = document.querySelectorAll('.nav-menu a');
 
-function setActive(id) {
+function updateSpy() {
+    const nearBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 60;
+    let current = '';
+    if (nearBottom) {
+        current = sections[sections.length - 1].id;
+    } else {
+        sections.forEach(section => {
+            if (window.scrollY >= section.offsetTop - navbar.offsetHeight - 60) {
+                current = section.id;
+            }
+        });
+    }
     navAnchors.forEach(a => {
-        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+        a.classList.toggle('active', a.getAttribute('href') === '#' + current);
     });
 }
 
-const spyObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-        if (entry.isIntersecting) setActive(entry.target.id);
-    });
-}, { rootMargin: '-40% 0px -55% 0px' });
+// ===== Back to top =====
+const backToTop = document.querySelector('.back-to-top');
+backToTop.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 
-sections.forEach(s => spyObserver.observe(s));
-
-// Activate last section when scrolled to bottom
 window.addEventListener('scroll', () => {
-    const nearBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 50;
-    if (nearBottom) {
-        const last = sections[sections.length - 1];
-        if (last) setActive(last.id);
-    }
+    backToTop.classList.toggle('visible', window.scrollY > 300);
+    updateSpy();
 });
 
 // ===== Section fade-in =====
