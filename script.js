@@ -35,17 +35,28 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 const sections = document.querySelectorAll('.section[id], header[id]');
 const navAnchors = document.querySelectorAll('.nav-menu a');
 
+function setActive(id) {
+    navAnchors.forEach(a => {
+        a.classList.toggle('active', a.getAttribute('href') === '#' + id);
+    });
+}
+
 const spyObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
-        if (entry.isIntersecting) {
-            navAnchors.forEach(a => {
-                a.classList.toggle('active', a.getAttribute('href') === '#' + entry.target.id);
-            });
-        }
+        if (entry.isIntersecting) setActive(entry.target.id);
     });
 }, { rootMargin: '-40% 0px -55% 0px' });
 
 sections.forEach(s => spyObserver.observe(s));
+
+// Activate last section when scrolled to bottom
+window.addEventListener('scroll', () => {
+    const nearBottom = window.innerHeight + window.scrollY >= document.body.scrollHeight - 50;
+    if (nearBottom) {
+        const last = sections[sections.length - 1];
+        if (last) setActive(last.id);
+    }
+});
 
 // ===== Section fade-in =====
 document.querySelectorAll('.section, .hero').forEach(el => el.classList.add('reveal'));
