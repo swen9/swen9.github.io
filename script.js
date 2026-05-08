@@ -32,7 +32,7 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
 });
 
 // ===== Scroll-spy =====
-const sections = document.querySelectorAll('.section[id]');
+const sections = document.querySelectorAll('[id]:is(.section, .hero)');
 const navAnchors = document.querySelectorAll('.nav-menu a');
 
 function updateSpy() {

@@ -48,7 +48,7 @@ nav {
 
 /* ===== Hero ===== */
 .hero {
-    max-width: var(--max-w); margin: 0 auto; padding: 100px 2rem 48px;
+    max-width: var(--max-w); margin: 0 auto; padding: 100px 2rem 24px;
     display: flex; gap: 2.5rem; align-items: flex-start;
 }
 .hero-img { flex-shrink: 0; text-align: center; }
@@ -143,16 +143,17 @@ nav {
 .pub-body p { font-size: 0.78rem; color: var(--text-secondary); }
 
 /* ===== Service ===== */
-.svc-tags {
-    display: flex; flex-wrap: wrap; gap: 0.6rem;
+.svc-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 0.6rem;
 }
-.svc-tags span {
-    padding: 0.4rem 1rem; border-radius: 6px;
-    font-size: 0.85rem; font-weight: 500; color: var(--text);
-    background: var(--bg-warm); border: 1px solid var(--border-light);
-    transition: all 0.15s;
+.svc-item {
+    padding: 0.6rem 0.8rem;
+    background: var(--bg-warm);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius);
 }
-.svc-tags span:hover { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+.svc-name { display: block; font-size: 0.85rem; font-weight: 600; color: var(--primary); }
+.svc-years { display: block; font-size: 0.72rem; color: var(--text-secondary); margin-top: 0.15rem; }
 
 /* ===== Back to top ===== */
 .back-to-top {
@@ -224,6 +225,7 @@ footer {
     .nav-menu.open { display: flex; }
     .nav-menu li { padding: 0; }
     .nav-menu a { display: block; padding: 0.75rem 2rem; font-size: 0.95rem; }
+    .svc-grid { grid-template-columns: repeat(2, 1fr); }
     .pub { flex-direction: column; gap: 0.3rem; }
     .pub-badge { width: auto; }
 }
